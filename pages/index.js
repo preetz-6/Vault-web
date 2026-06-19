@@ -4,15 +4,15 @@ import Head from 'next/head';
 // ── AES-256-GCM decrypt (mirrors CLI crypto.js) ────────────────────────────
 async function decryptEntry(b64, password) {
   try {
-    const buf        = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-    const salt       = buf.slice(0, 32);
-    const iv         = buf.slice(32, 48);
-    const tag        = buf.slice(48, 64);
-    const enc        = buf.slice(64);
+    const buf = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const salt = buf.slice(0, 32);
+    const iv = buf.slice(32, 48);
+    const tag = buf.slice(48, 64);
+    const enc = buf.slice(64);
     const encWithTag = new Uint8Array(enc.length + tag.length);
     encWithTag.set(enc); encWithTag.set(tag, enc.length);
 
-    const km  = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+    const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
     const key = await crypto.subtle.deriveKey(
       { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
       km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
@@ -35,67 +35,67 @@ async function hashEntryGuardAnswer(value) {
 }
 
 const CAT_LABELS = {
-  'app-lock':     'App Lock',
-  'login':        'Login',
-  'bank':         'Bank',
-  'wifi-other':   'Wi-Fi & Other',
+  'app-lock': 'App Lock',
+  'login': 'Login',
+  'bank': 'Bank',
+  'wifi-other': 'Wi-Fi & Other',
   'app-password': 'App',
-  'service':      'Service',
-  'info':         'Info',
-  'other':        'Other',
+  'service': 'Service',
+  'info': 'Info',
+  'other': 'Other',
 };
 
 // SVG icons — no emojis
 const IconLock = ({ size = 18, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
   </svg>
 );
 
 const IconChevronRight = ({ size = 18, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6"/>
+    <polyline points="9 18 15 12 9 6" />
   </svg>
 );
 
 const IconChevronLeft = ({ size = 20, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="15 18 9 12 15 6"/>
+    <polyline points="15 18 9 12 15 6" />
   </svg>
 );
 
 const IconCopy = ({ size = 15, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
   </svg>
 );
 
 const IconEye = ({ size = 15, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-    <circle cx="12" cy="12" r="3"/>
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+    <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
 const IconEyeOff = ({ size = 15, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-    <line x1="1" y1="1" x2="23" y2="23"/>
+    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+    <line x1="1" y1="1" x2="23" y2="23" />
   </svg>
 );
 
 const IconShield = ({ size = 14, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
   </svg>
 );
 
 const IconCheck = ({ size = 14, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="20 6 9 17 4 12"/>
+    <polyline points="20 6 9 17 4 12" />
   </svg>
 );
 
@@ -248,24 +248,24 @@ const GLOBAL_CSS = `
 `;
 
 export default function Home() {
-  const [stage, setStage]           = useState('pw');
-  const [password, setPassword]     = useState('');
+  const [stage, setStage] = useState('pw');
+  const [password, setPassword] = useState('');
   const [sqQuestion, setSqQuestion] = useState('');
-  const [sqAnswer, setSqAnswer]     = useState('');
-  const [sqHash, setSqHash]         = useState('');
-  const [error, setError]           = useState('');
-  const [rawEntries, setRaw]        = useState([]);
-  const [entries, setEntries]       = useState([]);
-  const [search, setSearch]         = useState('');
-  const [cat, setCat]               = useState('all');
-  const [selected, setSelected]     = useState(null);
-  const [showPw, setShowPw]         = useState(false);
-  const [copying, setCopying]       = useState('');
+  const [sqAnswer, setSqAnswer] = useState('');
+  const [sqHash, setSqHash] = useState('');
+  const [error, setError] = useState('');
+  const [rawEntries, setRaw] = useState([]);
+  const [entries, setEntries] = useState([]);
+  const [search, setSearch] = useState('');
+  const [cat, setCat] = useState('all');
+  const [selected, setSelected] = useState(null);
+  const [showPw, setShowPw] = useState(false);
+  const [copying, setCopying] = useState('');
 
   // Per-entry secret guard
-  const [guardState, setGuardState]   = useState('locked');
+  const [guardState, setGuardState] = useState('locked');
   const [guardAnswer, setGuardAnswer] = useState('');
-  const [guardError, setGuardError]   = useState('');
+  const [guardError, setGuardError] = useState('');
 
   const sqRef = useRef(null);
 
@@ -294,10 +294,10 @@ export default function Home() {
     if (!password) return;
     setError(''); setStage('loading');
     try {
-      const res  = await fetch('/api/entries');
+      const res = await fetch('/api/entries');
       const json = await res.json();
       if (json.error) throw new Error(json.error);
-      const raw  = json.entries || [];
+      const raw = json.entries || [];
 
       if (raw.length === 0) {
         setError('Vault is empty. Add entries from the desktop app first.');
@@ -307,9 +307,9 @@ export default function Home() {
       const test = await decryptEntry(raw[0].encrypted, password);
       if (!test) { setError('Incorrect password.'); setStage('pw'); return; }
 
-      const cfgRes  = await fetch('/api/config');
+      const cfgRes = await fetch('/api/config');
       const cfgJson = await cfgRes.json();
-      const cfg     = cfgJson.config || {};
+      const cfg = cfgJson.config || {};
       setRaw(raw);
 
       if (cfg.security_question && cfg.security_question_hash) {
@@ -371,7 +371,7 @@ export default function Home() {
   });
 
   const allCats = [...new Set(entries.map(e => e.category))];
-  const counts  = { all: entries.length };
+  const counts = { all: entries.length };
   allCats.forEach(c => { counts[c] = entries.filter(e => e.category === c).length; });
 
   async function copyText(text, key) {
@@ -395,7 +395,7 @@ export default function Home() {
   // ─────────────────────────────────────────────────────────────────────────────
   if (stage === 'pw' || stage === 'sq' || stage === 'loading') {
     const isLoading = stage === 'loading';
-    const isSq      = stage === 'sq';
+    const isSq = stage === 'sq';
 
     return (
       <>
@@ -489,7 +489,6 @@ export default function Home() {
               color: 'var(--text3)', fontSize: 11,
             }}>
               <IconShield size={12} color="var(--text3)" />
-              AES-256-GCM · decrypted locally · never leaves your device
             </div>
           </div>
         </div>
@@ -634,18 +633,18 @@ export default function Home() {
   // DETAIL VIEW
   // ─────────────────────────────────────────────────────────────────────────────
   if (stage === 'app' && selected) {
-    const d        = selected.data;
+    const d = selected.data;
     const isGuarded = !!d.hasSecretGuard && !!d.secretAnswerHash;
     const secretLabel = selected.category === 'bank' ? 'PIN / UPI PIN' : 'Password';
     const secretValue = selected.category === 'bank' ? d.pin : d.password;
 
     const plainFields = [
-      ['Account name',   d.name],
-      ['URL',            d.url],
+      ['Account name', d.name],
+      ['URL', d.url],
       ['Username / email', d.username],
-      ['Device',         d.device],
-      ['Notes',          d.notes],
-      ['Extra',          d.extra],
+      ['Device', d.device],
+      ['Notes', d.notes],
+      ['Extra', d.extra],
     ].filter(([, v]) => v);
 
     const FieldCard = ({ label, value, fieldKey, mono = false }) => (
@@ -818,5 +817,5 @@ export default function Home() {
 }
 
 // CSS variable shorthands for inline styles (Next.js doesn't support CSS vars in style prop directly without quotes)
-const var_r  = 'var(--r)';
+const var_r = 'var(--r)';
 const var_rs = 'var(--rs)';
