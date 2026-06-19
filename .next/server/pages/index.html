@@ -1,0 +1,146 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Vault</title><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/><meta name="theme-color" content="#09090b"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><meta name="next-head-count" content="6"/><noscript data-n-css=""></noscript><script defer="" crossorigin="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-8fa1640cc84ba8fe.js" defer="" crossorigin=""></script><script src="/_next/static/chunks/framework-03cd576e71e4cd66.js" defer="" crossorigin=""></script><script src="/_next/static/chunks/main-72cd581c1e9bd837.js" defer="" crossorigin=""></script><script src="/_next/static/chunks/pages/_app-a3f0dee1d78bc15f.js" defer="" crossorigin=""></script><script src="/_next/static/chunks/pages/index-20ca7b65348158fe.js" defer="" crossorigin=""></script><script src="/_next/static/q6C6wyhA84Q45gEJ3EZQv/_buildManifest.js" defer="" crossorigin=""></script><script src="/_next/static/q6C6wyhA84Q45gEJ3EZQv/_ssgManifest.js" defer="" crossorigin=""></script></head><body><div id="__next"><style>
+  @import url(&#x27;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap&#x27;);
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+
+  :root {
+    --bg:        #09090b;
+    --bg-card:   #111113;
+    --bg-input:  #0c0c0e;
+    --border:    rgba(255,255,255,0.07);
+    --border-focus: rgba(99,102,241,0.7);
+    --accent:    #6366f1;
+    --accent-dim:rgba(99,102,241,0.15);
+    --accent-glow:rgba(99,102,241,0.25);
+    --text:      #e4e4e7;
+    --text2:     #71717a;
+    --text3:     #3f3f46;
+    --danger:    #f87171;
+    --danger-dim:rgba(248,113,113,0.12);
+    --success:   #34d399;
+    --mono:      &#x27;JetBrains Mono&#x27;, monospace;
+    --sans:      &#x27;Inter&#x27;, -apple-system, sans-serif;
+    --r:         8px;
+    --rs:        6px;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle grid background */
+  body::before {
+    content: &#x27;&#x27;;
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(99,102,241,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,102,241,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  * { position: relative; z-index: 1; }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--text3); border-radius: 99px; }
+
+  input, textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--rs);
+    font-size: 15px;
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--bg-input);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+  }
+  input:focus, textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  input::placeholder { color: var(--text3); }
+
+  button { cursor: pointer; font-family: var(--sans); border: none; }
+
+  .btn-primary {
+    padding: 11px 20px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--rs);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: opacity 0.15s, transform 0.1s;
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .btn-ghost {
+    padding: 9px 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--rs);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text2);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.15); color: var(--text); background: rgba(255,255,255,0.04); }
+  .btn-ghost:active { transform: scale(0.98); }
+
+  .btn-ghost.copied {
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .error-text {
+    font-size: 13px;
+    color: var(--danger);
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: var(--danger-dim);
+    border-radius: var(--rs);
+    border: 1px solid rgba(248,113,113,0.2);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .fade-in { animation: fadeIn 0.2s ease-out both; }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+  }
+
+  .label-micro {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text2);
+  }
+
+  .mono { font-family: var(--mono); }
+</style><div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem"><div class="card fade-in" style="width:100%;max-width:380px;padding:2.5rem 2rem;box-shadow:0 0 60px rgba(99,102,241,0.08)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:2rem"><div style="width:34px;height:34px;border-radius:var(--r);background:var(--accent-dim);border:1px solid rgba(99,102,241,0.3);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><span style="font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--text)">Vault</span></div><div style="margin-bottom:1.5rem"><div class="label-micro" style="margin-bottom:6px">Step 1 of 2</div><h1 style="font-size:20px;font-weight:600;color:var(--text);line-height:1.3">Master password</h1></div><div style="margin-bottom:1rem"><input type="password" placeholder="Enter master password" autofocus="" value=""/></div><div style="display:flex;gap:8px"><button class="btn-primary" style="flex:1;width:100%">Continue</button></div><div style="display:flex;align-items:center;gap:6px;margin-top:1.75rem;padding-top:1.25rem;border-top:1px solid var(--border);color:var(--text3);font-size:11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>AES-256-GCM · decrypted locally · never leaves your device</div></div></div></div><script id="__NEXT_DATA__" type="application/json" crossorigin="">{"props":{"pageProps":{}},"page":"/","query":{},"buildId":"q6C6wyhA84Q45gEJ3EZQv","nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[]}</script></body></html>
