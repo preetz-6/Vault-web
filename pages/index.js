@@ -459,6 +459,7 @@ export default function Home() {
                     onChange={e => isSq ? setSqAnswer(e.target.value) : setPassword(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && (isSq ? handleSqSubmit() : handlePasswordSubmit())}
                     autoFocus={!isSq}
+                    autoComplete={isSq ? 'one-time-code' : 'off'}
                   />
                   {error && <div className="error-text">{error}</div>}
                 </div>
@@ -757,6 +758,7 @@ export default function Home() {
                     onChange={e => setGuardAnswer(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && verifyGuardAnswer()}
                     autoFocus
+                    autoComplete="one-time-code"
                     style={{ marginBottom: guardError ? 0 : 10 }}
                   />
                   {guardError && <div className="error-text" style={{ marginBottom: 10 }}>{guardError}</div>}
